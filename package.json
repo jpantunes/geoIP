@@ -10,7 +10,7 @@
   "dependencies": {
     "express": "^4.12.3",
     "pg": "^7.12.1",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.7.0"
   },
   "devDependencies": {
     "should": "^7.1.0",
@@ -18,9 +18,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test",    
+    "test": "swagger project test",
     "start:docker": "docker-compose -f ./docker/docker-compose.yml up --build",
     "stop:docker": "docker-compose -f ./docker/docker-compose.yml down"
-
   }
 }

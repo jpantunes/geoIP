@@ -88,10 +88,10 @@ typings/
 .dynamodb/
 
 # pgsql persistent volument for docker
-db_data/
+db_data/*
 
 # GeoLite2 data 
-load/*.csv
+db_load/*.csv
 
 #my notes
 TODO.txt

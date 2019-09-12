@@ -21,10 +21,17 @@ swagger:
       name: swagger_validator
       validateResponse: true
 
+      #added after npm audit fix broke the app
+    _json_error_handler:                       
+      name: json_error_handler
+      handle500Errors: true    
+
     # pipe for all swagger-node controllers
     swagger_controllers:
-      - onError: json_error_handler
+      # - onError: json_error_handler
+      - onError: _json_error_handler #added after npm audit fix broke the app     
       - cors
+      - swagger_params_parser #added after npm audit fix broke the app
       - swagger_security
       - _swagger_validate
       - express_compatibility

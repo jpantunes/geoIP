@@ -13,7 +13,8 @@
 var Pool = require('pg').Pool;
 
 var pool = new Pool({
-	host: 'geoIP_db',
+    // host: 'localhost', //for use with local dev pgsql    
+	host: 'geoIP_db', //for use with docker
 	port: 5432,	
 	database: 'postgres',	
 	user: 'postgres',
@@ -37,10 +38,11 @@ module.exports = {
 };
 
 /*
-  Functions in a127 controllers used for operations should take two parameters:
+  Functions in a127 controllers used for operations should take three parameters:
 
   Param 1: a handle to the request object
   Param 2: a handle to the response object
+  Param 3: callback argument to the middleware function, called "next" by convention.
  */
 function getLocation(req, res, next) {
     var ip = req.swagger.params.ip.value || '1.1.1.1'

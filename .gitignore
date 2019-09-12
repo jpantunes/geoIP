@@ -86,3 +86,12 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# pgsql persistent volument for docker
+db_data/
+
+# GeoLite2 data 
+db_data/*.csv
+
+#my notes
+TODO.txt

@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  app:
+    container_name: geoIP_app
+    restart: always
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "10010:10010"
+    volumes:
+      - ../:/src/app/
+    command: npm start
+    environment:
+      POSTGRES_HOST: geoIP_db:postgres@postgres:5432
+      PORT: 10010    
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  postgres:
+    container_name: geoIP_db
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ../db_data:/var/lib/postgresql/data  
+      - ../db_load:/src/app/db_load
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+  
+      # swagger-editor:
+  #   image: swaggerapi/swagger-editor
+  #   ports:
+  #     - "3001:8080"
+  # swagger-ui:
+  #   image: swaggerapi/swagger-ui
+  #   ports:
+  #     - "3002:8080"
+  #   volumes:
+  #     - ../docs/api/:/docs/api
+  #   environment:
+  #     - SWAGGER_JSON=/api/swagger.yaml

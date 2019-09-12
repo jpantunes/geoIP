@@ -13,11 +13,11 @@
 var Pool = require('pg').Pool;
 
 var pool = new Pool({
-	host: 'localhost',
+	host: 'geoIP_db',
 	port: 5432,	
 	database: 'postgres',	
 	user: 'postgres',
-	password: '',
+	password: 'postgres',
 	});
 
 /*

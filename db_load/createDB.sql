@@ -11,11 +11,6 @@ CREATE TABLE geoip_blocks (
     accuracy_radius smallint
 );
 
-copy geoip_blocks from '/src/app/db_load/GeoLite2-City-Blocks-IPv4.csv' delimiter ',' csv header;
-copy geoip_blocks from '/src/app/db_load/GeoLite2-City-Blocks-IPv6.csv' delimiter ',' csv header;
-
-CREATE INDEX geoip_blocks_network_idx ON geoip_blocks USING gist (network inet_ops);
-
 CREATE TABLE geoip_locations (
     geoname_id bigint,
     locale_code varchar(2),
@@ -33,7 +28,11 @@ CREATE TABLE geoip_locations (
     is_in_european_union bool
 );
 
+copy geoip_blocks from '/src/app/db_load/GeoLite2-City-Blocks-IPv4.csv' delimiter ',' csv header;
+copy geoip_blocks from '/src/app/db_load/GeoLite2-City-Blocks-IPv6.csv' delimiter ',' csv header;
 copy geoip_locations from '/src/app/db_load/GeoLite2-City-Locations-en.csv' delimiter ',' csv header encoding 'UTF8';
 
-grant all on schema public to public;
-grant all on schema public to postgres;
+CREATE INDEX geoip_blocks_network_idx ON geoip_blocks USING gist (network inet_ops);
+
+-- grant all on schema public to public;
+-- grant all on schema public to postgres;

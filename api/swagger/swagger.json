@@ -1,0 +1,72 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "0.0.1",
+    "title" : "GeoIP App"
+  },
+  "host" : "localhost:10010",
+  "basePath" : "/",
+  "schemes" : [ "http", "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/location/{ip}" : {
+      "get" : {
+        "description" : "Returns geo-location of IP provided",
+        "operationId" : "getLocation",
+        "parameters" : [ {
+          "name" : "ip",
+          "in" : "path",
+          "description" : "The ip which to find the location for",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/GeoIPLocationResponse"
+            }
+          },
+          "default" : {
+            "description" : "Error",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "x-swagger-router-controller" : "geoIP"
+    },
+    "/swagger" : {
+      "x-swagger-pipe" : "swagger_raw"
+    }
+  },
+  "definitions" : {
+    "GeoIPLocationResponse" : {
+      "required" : [ "city_name", "country_iso_code", "country_name", "network" ],
+      "properties" : {
+        "network" : {
+          "type" : "string"
+        },
+        "city_name" : {
+          "type" : "string"
+        },
+        "country_name" : {
+          "type" : "string"
+        },
+        "country_iso_code" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ErrorResponse" : {
+      "required" : [ "message" ],
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

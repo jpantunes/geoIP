@@ -91,7 +91,7 @@ typings/
 db_data/
 
 # GeoLite2 data 
-db_data/*.csv
+load/*.csv
 
 #my notes
 TODO.txt
